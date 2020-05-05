@@ -52,18 +52,13 @@ namespace DevOpsLeadsApi.Api
 
         private static IList<Lead> BuildLeads()
         {
-            var name = Faker.Name.First();
             var rng = new Random();
-            var range = Enumerable.Range(1, 5);
-            return range.Select(index =>
-            {
-                Console.WriteLine(rng.Next(Services.Length));
-                return new Lead(index, Faker.Name.First(), Faker.Name.Last())
-                {
-                    Address = Faker.Address.StreetAddress(),
-                    Service = Services[rng.Next(Services.Length)]
-                };
-            }).ToList();
+            return Enumerable.Range(1, 5).Select(index => 
+                new Lead(index, Faker.Name.First(), Faker.Name.Last())
+                    {
+                        Address = Faker.Address.StreetAddress(),
+                        Service = Services[rng.Next(Services.Length)]
+                    }).ToList();
         }
     }
 }
