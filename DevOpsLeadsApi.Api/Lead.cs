@@ -24,7 +24,7 @@ namespace DevOpsLeadsApi.Api
         
         public DateTime CreatedAt { get; set; }
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             if (!(obj is Lead other))
             {
