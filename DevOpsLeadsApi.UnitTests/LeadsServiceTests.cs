@@ -36,7 +36,7 @@ namespace UnitTests
         {
             var service = new LeadsService();
             var leads = service.GetLeads().ToList();
-            var leadToUpdate = leads.OrderBy(x => Guid.NewGuid()).First();
+            var leadToUpdate = leads.OrderBy(x => Guid.NewGuid()).First().Clone();
             var originalCount = leads.Count();
             var originalAddress = leadToUpdate.Address;
             leadToUpdate.Address = Faker.Address.StreetAddress();
@@ -46,7 +46,7 @@ namespace UnitTests
             Assert.All(updatedLeads,l => Assert.NotEqual(originalAddress,l.Address));
             Assert.Equal(originalCount,updatedLeads.Count());
         }
-
+        
         [Fact]
         public void ShouldDeleteLeads()
         {

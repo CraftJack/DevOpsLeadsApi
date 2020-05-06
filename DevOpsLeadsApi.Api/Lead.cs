@@ -4,26 +4,25 @@ namespace DevOpsLeadsApi.Api
 {
     public class Lead
     {
-        private readonly string _firstName;
-        private readonly string _lastName;
-
+        public Lead() : this(null, null, null){}
         public Lead(string firstName, string lastName) : this(null, firstName, lastName){}
         
         public Lead(int? id, string firstName, string lastName)
         {
             Id = id;
-            _firstName = firstName;
-            _lastName = lastName;
+            FirstName = firstName;
+            LastName = lastName;
         }
         public int? Id { get; set; }
         
-        public string FullName => $"{_firstName} {_lastName}";
-
+        public string FullName => $"{FirstName} {LastName}";
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Address { get; set; }
         public string Service { get; set; }
         
         public DateTime CreatedAt { get; set; }
-
+        
         public override bool Equals(object obj)
         {
             if (!(obj is Lead other))
@@ -32,10 +31,20 @@ namespace DevOpsLeadsApi.Api
             }
             return Id == other.Id;
         }
-
+        
         public override int GetHashCode()
         {
             return Id.GetHashCode();
         }
+        
+        public Lead Clone() => new Lead
+        {
+            Id = this.Id,
+            FirstName = this.FirstName,
+            LastName = this.LastName,
+            Address = this.Address,
+            Service = this.Service,
+            CreatedAt = this.CreatedAt
+        };
     }
 }
